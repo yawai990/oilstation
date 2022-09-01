@@ -1,0 +1,116 @@
+<%- include('./components/Navbar') %>
+
+    <section id="staffs_table" class="d-flex justify-center align-items-center flex-column">
+        <div class="container mt-5 rounded shadow-lg bg-white border p-2">
+            <div>
+                <h4>Employees</h4>
+            </div>
+            <div class="table-responsive">
+                <table border="1" style="width:100%;text-align:center;border-collapse: collapse;border-style: dotted;"
+                    class='w-100 rounded border shadow-md bg-light  table table-striped table-hover'>
+                    <thead class='text-muted border thead-dark'>
+                        <tr>
+                            <th class='border'>Name</th>
+                            <th class='border'>NRC</th>
+                            <th class='border'>salary</th>
+                            <th class='border'>hire_date</th>
+                            <th class='border'></th>
+                        </tr>
+                    </thead>
+                    <tbody id="body" className='text-center table-group-divider'>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </section>
+    <div class="d-flex justify-content-center items-center mt-5 gap-2">
+        <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+        <button id="btn" class="btn btn-success py-1 px-3 rounded-pill text-white">Print</button>
+    </div>
+
+    <script type="text/javascript">
+        //printing 
+        const prtContent = document.getElementById("staffs_table") || document.getElementById('vouncher_receipt') || document.getElementById("customer-print-area");
+        document.getElementById('btn').addEventListener('click', (e) => {
+            const WinPrint = window.open('', '', 'left=0,top=0,width=1100,height=900,toolbar=0,scrollbars=0,status=0');
+
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        });
+        //inserting the data to the front end table
+        const getallstaffs = async () => {
+            fetch('http://localhost:5000/getallstaffs')
+                .then(resp => resp.json())
+                .then(data => {
+                    for (let i = 0; i < data.staffs.length; i++) {
+                        const d = new Date(data.staffs[i].hire_date);
+
+                        const day = d.getDate();
+                        const month = d.getMonth() + 1;
+                        const year = d.getFullYear();
+
+                        document.getElementById('body').innerHTML += data.staffs.length !== 0 ? `<tr class='border'>
+                                                                                                                       <td>${data.staffs[i].name}</td>
+                             <td>${data.staffs[i].nrc}</td>
+                              <td>${data.staffs[i].salary}</td>           
+                                <td>${day.toString().length <= 1 ? '0' + day : day}-${month.toString().length <= 1 ? '0' + month : month}-${year}</td>           
+                                <td class='d-flex gap-2 flex-column flex-md-row'>
+                                  <a href='/getallstaffs/staff/${data.staffs[i].id}'
+                                  onClick=getId(${data.staffs[i].id})
+                                   class='btn btn-primary text-center p-1 rounded btn'>Edit</a>                 
+                                  <button onClick=deleteStaff(${data.staffs[i].id}) class='delete_one btn btn-danger text-center p-1 rounded' >delete</button> </td> 
+                                  </tr>`
+                            :
+                            `<p class="font-weight-bold">no records to display</p>`
+                    }
+
+                })
+                .catch(err => console.log(err));
+        }
+        getallstaffs();
+
+        function getId(id) {
+
+            function getCurrentStaffData(id) {
+
+                fetch(`http://localhost:5000/getallstaffs/staff/${id}`)
+                    .then(resp => resp.json())
+                    .then(e => {
+                        document.getElementById('name').setAttribute('value', e[0].name)
+                        // document.getElementById('name').setAttribute('value', e[0].name)
+                        if (e[0].status === '1') {
+                            document.getElementById('status1').setAttribute('checked', 'checked')
+                        }
+                        if (e[0].status === '0') {
+                            document.getElementById('status0').setAttribute('checked', 'checked')
+                        }
+                        document.getElementById('salary').setAttribute('value', e[0].salary)
+                        console.log(typeof e[0].status)
+
+                    })
+                    .catch(err => console.log(err))
+            };
+
+            getCurrentStaffData(id)
+
+
+        }
+        //delete the seleted staff
+        const deleteStaff = async (id) => {
+            fetch(`http://localhost:5000/getallstaffs/staff/${id}`, {
+                method: 'DELETE'
+            })
+                .then(resp => resp.json())
+                .then(respText => {
+                    alert(respText.message)
+                    getallstaffs()
+                    location.reload()
+                })
+                .catch(err => console.log(err));
+        };
+    </script>

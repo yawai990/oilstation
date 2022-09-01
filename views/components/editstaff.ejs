@@ -1,0 +1,140 @@
+<%- include('./Navbar') %>
+    <section class="d-flex justify-content-center items-center p-2">
+        <div class="col-sm-10 col-md-8 col-lg-6 p-2 rounded bg-white shadow border">
+
+            <div class="text-center mb-4">
+                <h2 class="fs-4">Person Information</h2>
+            </div>
+
+
+            <form id="staff_update_form" action=" " class="p-2">
+                <div class="mb-3 row">
+                    <label for="name" class="col-sm-2 col-form-label">Employee Name
+
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" value='<%=data[0].name %>'>
+                    </div>
+                </div>
+
+                <p id="id" class="d-none">
+                    <%= data[0].id %>
+                </p>
+
+
+                <div class="mb-3 row">
+                    <label for="" class="col-sm-2 col-form-label">NRC</label>
+                    <div class="col-sm-10 d-flex gap-1">
+                        <div class="col-2">
+                            <select class="form-select text-center" name="region" id="region"
+                                aria-label="Default select example">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control text-center" placeholder="/" value="/" readonly>
+                        </div>
+                        <div class="col-3">
+                            <input type="text" name="township" id="township" class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <select class="form-select text-center" aria-label="Default select example">
+                                <option value="N">(N)</option>
+                                <option value="C">(C)</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <input type="number" name="N_id" id="N_id" min="000001" max='999999' class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-3 row d-flex">
+                    <label for="status" class="col-sm-2">Status</label>
+
+                    <div class="col-sm-10 d-flex gap-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value='1' checked />
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Working
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value='0' name="status" id="status0" />
+                            <label class="form-check-label" for="status0">
+                                Resigned
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 row d-flex">
+                    <label for="salary" class="col-sm-2">Basic Salary(MMK)</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="salary" id="salary" value='<%=data[0].salary %>'
+                            placeholder="Only number avilable...">
+                    </div>
+                </div>
+                <div class="col-sm-6 m-auto d-flex justify-content-center items-center">
+                    <button class="col-sm-6 btn btn-primary block">Edit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        const name = document.getElementById('name').value;
+        const status = document.getElementsByName('status');
+        const id = document.getElementById('id').innerText;
+        const region = document.getElementById('region');
+        const townShip = document.getElementById('township');
+        const n_id = document.getElementById('N_id');
+        let statusCondition, region_id, township, nID;
+
+        region.addEventListener('change', e => console.log(e.target.value));
+        townShip.addEventListener('change', e => township = e.target.value);
+        n_id.addEventListener('change', e => nID = e.target.value);
+        status.forEach(st => {
+            st.addEventListener('change', e => {
+                statusCondition = e.target.value
+            })
+        })
+
+        const salary = document.getElementById('salary').value;
+
+        document.getElementById("staff_update_form").addEventListener('submit', e => {
+
+            e.preventDefault()
+            const updateData = {
+                name, id: parseInt(id),
+                region, townShip, n_id, statusCondition
+            }
+
+            fetch(`http://localhost:5000/getallstaffs/staff/${updateData.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'maung maung'
+                })
+            })
+                .then(resp => resp.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        })
+    </script>
