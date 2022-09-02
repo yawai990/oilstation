@@ -1,0 +1,87 @@
+<%- include('./components/Navbar.ejs') %>
+    <div class="w-100">
+        <div id="vouncher_receipt_one" class="w-75 m-auto p-1">
+            <div class="col-6 bg-white rounded shadow-sm border text-center m-auto p-2 mb-4">
+                <div>
+                    <h2>Happy Fuel</h2>
+                    <p>PaungKaYa Road</p>
+                    <p>09111222333</p>
+                </div>
+                <hr />
+                <div>
+                    <p>
+                        <span>Date :</span>
+                        <span>
+                            <%= result[0].sale_date_time %>
+                        </span>
+                    </p>
+
+                    <p>
+                        <span>Pump :</span>
+                        <span>
+                            01
+                        </span>
+                    </p>
+                </div>
+                <br />
+
+                <div>
+                    <h2>Details</h2>
+
+                    <p>
+                        <span>Base Price :</span>
+                        <span>
+                            <%= result[0].price %>/liter
+                        </span>
+                    </p>
+
+                    <p>
+                        <span>
+                            <strong>Liter :</strong>
+                        </span>
+                        <span>
+                            <%= result[0].liter.toString().slice(0,5) %>
+                        </span>
+                    </p>
+
+                    <p>
+                        <span>
+                            <strong>Amount :</strong>
+                        </span>
+                        <span>
+                            <%= result[0].amount%>
+                                <small style="font-size: 10px;" class="font-italic">MMK</small>
+                        </span>
+                    </p>
+                </div>
+                <hr />
+
+                <p>
+                <address>
+                    <i>
+                        Thank You For Visiting Happy Fuel
+                    </i>
+                </address>
+            </div>
+        </div>
+
+        <button id="btn" class="btn btn-success py-1 px-3 rounded-pill text-white d-block m-auto">Print</button>
+
+    </div>
+
+    <script>
+
+        //for print the vouncher start
+        const prtContent = document.getElementById("vouncher_receipt_one");
+        document.getElementById('btn').addEventListener('click', (e) => {
+            const WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=900,toolbar=0,scrollbars=0,status=0');
+
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        });
+
+    //print vouncher end
+    </script>

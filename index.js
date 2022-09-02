@@ -15,7 +15,7 @@ app.get('/staffs',(req,res)=>{
 //api
 app.use('/getallstaffs',require('./routes/Staffs'));
 app.use('/customers',require('./routes/Customer'));
-
 app.use('/salesdata',require('./routes/Sale'));
+app.use('/vouncher',require('./routes/Vouncher'));
 
 app.listen(5000,()=>console.log('servere running'));

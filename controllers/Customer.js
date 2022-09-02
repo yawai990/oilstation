@@ -15,7 +15,7 @@ const getCustomer = async(req,res)=>{
             connection.query(`SELECT * FROM oilproject.customers WHERE id=${id}`,(err,result)=>{
                 if(err)throw new Error(err)
 
-                res.render('oneCustomer',{result})
+                res.render('oneCustomer',{result})  
             })
     } catch (error) {
         console.log(error)
@@ -24,8 +24,8 @@ const getCustomer = async(req,res)=>{
 
 //need to find out how to update the data
 const updateCustomer = async(req,res)=>{
-    console.log(req.query)
-    res.redirect('/customers')
+    console.log(req.id)
+    res.render('Customer')
 }
 
 const deleteCustomer = async(req,res)=>{

@@ -4,7 +4,7 @@ const {getCustomers,deleteCustomer,getCustomer,updateCustomer} = require('../con
 
 customerRouter.get('/',getCustomers)
                          .get('/:id',getCustomer)
-                         .post('/',updateCustomer)
+                         .patch('/:id',updateCustomer)
                           .delete('/',deleteCustomer);
 
 
