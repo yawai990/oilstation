@@ -1,6 +1,8 @@
 <div class="container d-flex justify-content-center align-items-center p-2">
     <div class="mt-4">
-        <form action="/customer/<%= result[0].id  %>?_method=PATCH" method="post" id="cus_update_form">
+        <form action="/customers" method="post" id=" cus_update_form">
+        
+            <input type="number" name="id" id="id" value=<%=result[0].id %> class='d-none' >
             <div class="mb-3">
                 <label for="cus_licence">Customer Licence</label>
                 <input type="text" name="cus_licence" id="cus_licence" class="form-control"
@@ -10,15 +12,3 @@
         </form>
     </div>
 </div>
-<!-- <script>
-    const value = document.getElementById('cus_licence').value;
-
-    value.addEventListener('onchange', e => {
-        console.log(e)
-    })
-    document.getElementById('cus_update_form').addEventListener('submit', e => {
-        e.preventDefault()
-        console.log(value)
-    })
-
-</script> -->

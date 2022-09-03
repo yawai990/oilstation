@@ -1,0 +1,59 @@
+<%- include('./components/Navbar') %>
+    <div>
+        <div class="bg-white border m-auto col-12 col-sm-10 col-md-8 col-lg-6 p-2 rounded shadow-sm">
+            <h3 class="text-center">Add New Receipt</h3>
+
+            <form action="" class="w-100 m-auto p-2 mt-4">
+
+                <div class="row mb-3">
+                    <div class="mb-3 col-md-6 col-sm-12 row">
+                        <label for="cus_name" class="col-sm-2 col-md-3 col-form-label">Licence</label>
+                        <div class="col-sm-12 col-md-9">
+                            <input type="text" class="form-control" id="cus_name" name="cus_name">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-6 col-sm-12 row">
+                        <label for="date" class="col-sm-2 col-md-3 col-form-label">Date</label>
+                        <div class="col-sm-12 col-md-9">
+                            <input type="date" class="form-control" id="date" name="date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="mb-3 col-md-6 col-sm-12 row">
+                        <label for="product" class="col-sm-2 col-md-3 col-form-label">Product</label>
+                        <div class="col-sm-12 col-md-9">
+                            <input type="text" class="form-control" id="product" name="product"
+                                placeholder="should be select" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-6 col-sm-12 row">
+                        <label for="amount" class="col-sm-2 col-md-3 col-form-label">Amount</label>
+                        <div class="col-sm-12 col-md-9">
+                            <input type="number" class="form-control" id="amount" min="0" name="amount">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="mb-3 col-md-6 col-sm-12 row">
+                        <label for="staff_name" class="col-sm-2 col-md-3 col-form-label">SaleBy</label>
+                        <div class="col-sm-12 col-md-9">
+                            <input type="text" class="form-control" id="staff_name" name="staff_name"
+                                placeholder="should be select">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-6 row">
+
+                    </div>
+                </div>
+
+                <button style="min-width: 100px;" class="p-1 m-auto d-block btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>

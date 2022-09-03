@@ -8,7 +8,7 @@ const getCustomers = async(req,res)=>{
     })
 };
 
-const getCustomer = async(req,res)=>{
+const getCustomer = async(req,res,next)=>{
     const id = parseInt(req.params.id);
 
     try {
@@ -24,8 +24,13 @@ const getCustomer = async(req,res)=>{
 
 //need to find out how to update the data
 const updateCustomer = async(req,res)=>{
-    console.log(req.id)
-    res.render('Customer')
+    const {id,cus_licence} = req.body;
+
+    connection.query(`UPDATE oilproject.customers SET licence='${cus_licence}' WHERE id=${parseInt(id)}`,(err,result)=>{
+        if(err)throw new Error(err);
+        //will add flash message later
+        res.redirect('/customers')
+    })
 }
 
 const deleteCustomer = async(req,res)=>{

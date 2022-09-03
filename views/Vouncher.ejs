@@ -1,7 +1,26 @@
+<style>
+    @page: right {
+        @bottom-left {
+            margin: 10pt 0 30pt 0;
+            border-top: .25pt solid rgb(255, 0, 0);
+            content: "My book";
+            font-size: 9pt;
+            color: #333;
+            background-color: red;
+        }
+    }
+
+
+    @media print {
+        div#vouncher_receipt_one {
+            border: 1px solid red;
+        }
+    }
+</style>
 <%- include('./components/Navbar.ejs') %>
     <div class="w-100">
-        <div id="vouncher_receipt_one" class="w-75 m-auto p-1">
-            <div class="col-6 bg-white rounded shadow-sm border text-center m-auto p-2 mb-4">
+        <div class="w-75 m-auto p-1">
+            <div id="vouncher_receipt_one" class="col-6 bg-white rounded shadow-sm border text-center m-auto p-2 mb-4">
                 <div>
                     <h2>Happy Fuel</h2>
                     <p>PaungKaYa Road</p>
@@ -77,6 +96,7 @@
             const WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=900,toolbar=0,scrollbars=0,status=0');
 
             WinPrint.document.write(prtContent.innerHTML);
+            prtContent.style.textAlign = 'center'
             WinPrint.document.close();
             WinPrint.focus();
             WinPrint.print();

@@ -1,12 +1,10 @@
 const connection = require('../db/db');
 
 const getAllStaffs =async (req,res)=>{
-    let staffs = [];
     try {
         connection.query('SELECT * FROM oilproject.staffs',(err,results)=>{
             if(err) console.log(err)
-            staffs.push(...results)
-            res.status(200).json({staffs})
+            res.render('Staffs',{results})
         })
     } catch (error) {
             res.staffs(400).json({error})
@@ -47,9 +45,7 @@ const deleteStaff = async(req,res)=>{
     try {
             connection.query(`DELETE FROM oilproject.staffs WHERE id = ${id}`,(err,result)=>{
                 if(err)throw new Error(err)
-                res.status(202).json({
-                    message:'staff deleted'
-                });
+                res.redirect('/staffs')
             })
     } catch (error) {
             res.send(error)
