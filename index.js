@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(methodOverride('_method'));
 
 //api
+app.get('/',(req,res)=>{
+    res.redirect('/users/login')
+});
+app.use('/users',require('./routes/users'));
 app.use('/staffs',require('./routes/Staffs'))
 app.use('/customers',require('./routes/Customer'));
 app.use('/salesdata',require('./routes/Sale'));

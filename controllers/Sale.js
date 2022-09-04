@@ -21,7 +21,7 @@ const deleteSale = async (req,res)=>{
  try {
         connection.query(`DELETE FROM oilproject.sales WHERE id=${id}`,(err,resutl)=>{
             if(err) throw new Error(err);
-            res.render('/Sales')
+            res.redirect('/salesdata')
         })
  } catch (error) {
         console.log(error)
