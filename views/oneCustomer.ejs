@@ -1,5 +1,7 @@
+<%- include('./components/Navbar') %>
 <div class="container d-flex justify-content-center align-items-center p-2">
-    <div class="mt-4">
+    <div class="mt-4 bg-white shadow-sm border rounded p-3">
+        <h4 class="fs-5 mb-4">Update Customer Licence</h4>
         <form action="/customers" method="post" id=" cus_update_form">
         
             <input type="number" name="id" id="id" value=<%=result[0].id %> class='d-none' >

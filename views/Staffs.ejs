@@ -40,15 +40,16 @@
                                                         </td>
                                                         <td>
                                                             <%= new Date(results[i].hire_date).getDate() %>-
-                                                                <%= new Date(results[i].hire_date).getMonth()%>-
+                                                                <%= new Date(results[i].hire_date).getMonth() + 1%>-
                                                                     <%= new Date(results[i].hire_date).getFullYear()%>
                                                         </td>
                                                         <td scope="'col" class="btn-group">
-                                                            <button class="btn btn-sm btn-info text-white shadow-md">Edit</button>
+                                                            <a href="/staffs/staff/update_staff/<%= results[i].id %> " type="button"
+                                                                class="btn btn-sm btn-info text-white shadow-md">Edit</a>
                                                             <form action="/staffs/staff/<%= results[i].id  %>?_method=DELETE " method="post">
                                                                 <button class="btn btn-sm btn-danger shadow-md">Delete</button>
                                                             </form>
-                                                            <a " type=" button" class="btn btn-sm btn-success shadow-md">Print</a>
+                                                            <a type=" button" class="btn btn-sm btn-success shadow-md">Print</a>
                                                         </td>
                                                         </tr>
                                                         <% } %>
@@ -59,7 +60,7 @@
         </div>
     </section>
     <div class="d-flex justify-content-center items-center mt-5 gap-2">
-        <button class="btn btn-info py-1 px-3 rounded-pill text-white">Add New Staff</button>
+        <a href="/staffs/staff_add_form" type="button" class="btn btn-info py-1 px-3 rounded-pill text-white">Add New Staff</a>
         <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
         <button id="btn" class="btn btn-success py-1 px-3 rounded-pill text-white">Print</button>
     </div>

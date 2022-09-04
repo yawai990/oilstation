@@ -21,24 +21,45 @@ const getStaff = async(req,res)=>{
 };
 
 //need to add
+const addstaffForm= async(req,res)=>{
+    res.render('addStaffForm')
+}
 const addStaff=async(req,res)=>{
-    const {name,nrc,hire_date,salary,status} = req.body;
-    
+    const {staff_name,nrc,h_date,salary} = req.body;
+    let errors = [];
+
+        if(!staff_name || !nrc || !h_date || !salary){
+          errors.push({message:'Please fill all fields'})
+        }
+     if(errors.length > 0){
+        res.render('addStaffForm',{errors})
+     }else{
+        connection.query(`INSERT INTO oilproject.staffs(name,hire_date,nrc,salary) VALUES('${staff_name}','${h_date}','${nrc}',${parseInt(salary)})`,(err,result)=>{
+            if(err) throw new Error(err);
+            res.redirect('/staffs')
+        })
+     }
+};
+
+const updateStaffForm = async(req,res)=>{
+    const id = parseInt(req.params.id);
+
+    connection.query(`SELECT * FROM staffs WHERE id=${id}`,(err,result)=>{
+        if(err)throw new Error(err);
+        res.render('updateStaffForm',{result})
+    })
 }
 
-//need to fix for nrc
 const updateStaff = async (req,res)=>{
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
 
-    console.log(req)
-    res.json('i am update staff what u want to do')
-    // const {name,salary,hire_date,status,region,township,N_id} = req.body;
+    const {staff_name,salary,h_date,status,nrc} = req.body;
     //grab the staff data that equal with the id
    //create the button for update in front-end page
-//    connection.query(`UPDATE oilproject.staffs SET name='${name}',salary=${salary},hire_date='${hire_date}',status=${status}',nrc='${region}/${township}(N)${N_id} WHERE id=${id}'`,(err,result)=>{
-//         if(err)throw new Error(err)
-//         res.status(201).redirect('/staffs')
-//    })
+   connection.query(`UPDATE oilproject.staffs SET name='${staff_name}',salary=${salary},hire_date='${h_date}',status='${status}',nrc='${nrc}' WHERE id=${id}`,(err,result)=>{
+        if(err)throw new Error(err)
+        res.status(201).redirect('/staffs')
+   })
 }
 // delete controller
 const deleteStaff = async(req,res)=>{
@@ -59,4 +80,9 @@ const deleteAllStaffs = async(req,res)=>{
     res.staffs(201).json('all staff deleted')
 };
 
-module.exports = {getAllStaffs,addStaff,deleteStaff,getStaff,updateStaff,deleteAllStaffs};
+module.exports = {
+    getAllStaffs,getStaff,
+    addstaffForm,addStaff,
+    updateStaff,updateStaffForm,
+    deleteAllStaffs,deleteStaff
+};
