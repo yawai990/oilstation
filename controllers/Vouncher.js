@@ -3,7 +3,6 @@ const connection = require('../db/db');
 
 const getVouncher = async(req,res)=>{
     const id = parseInt(req.params.id);   
-    console.log(id)
 
     try{
         connection.query(`SELECT * FROM oilproject.vw_vouncher WHERE amount =${id}`,(err,result)=>{

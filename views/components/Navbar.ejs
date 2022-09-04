@@ -16,10 +16,16 @@
         </li>
         <li class="nav-item">
             <!-- with passport is gonna be logout by itself when we pressed -->
-            <form action="">
+            <form action="/users/logout?_method=DELETE" method="post">
                 <button class="btn btn-danger rounded nav-link py-1 text-white">Log Out</button>
             </form>
         </li>
     </ul>
+
+    <p class="m-2">
+        <%= new Date().getDate().toString().length < 2 ? '0' + new Date().getDate() :new Date().getDate() %>-
+            <%= new Date().getMonth().toString().length < 2 ? '0' + (new Date().getMonth()+1 ):new Date().getMonth()+1 %>-
+                <%= new Date().getFullYear()%>
+    </p>
 
 </nav>

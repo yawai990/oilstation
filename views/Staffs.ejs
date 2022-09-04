@@ -77,43 +77,4 @@
             WinPrint.close();
         });
 
-        function getId(id) {
-
-            function getCurrentStaffData(id) {
-
-                fetch(`http://localhost:5000/getallstaffs/staff/${id}`)
-                    .then(resp => resp.json())
-                    .then(e => {
-                        document.getElementById('name').setAttribute('value', e[0].name)
-                        // document.getElementById('name').setAttribute('value', e[0].name)
-                        if (e[0].status === '1') {
-                            document.getElementById('status1').setAttribute('checked', 'checked')
-                        }
-                        if (e[0].status === '0') {
-                            document.getElementById('status0').setAttribute('checked', 'checked')
-                        }
-                        document.getElementById('salary').setAttribute('value', e[0].salary)
-                        console.log(typeof e[0].status)
-
-                    })
-                    .catch(err => console.log(err))
-            };
-
-            getCurrentStaffData(id)
-
-
-        }
-        //delete the seleted staff
-        const deleteStaff = async (id) => {
-            fetch(`http://localhost:5000/getallstaffs/staff/${id}`, {
-                method: 'DELETE'
-            })
-                .then(resp => resp.json())
-                .then(respText => {
-                    alert(respText.message)
-                    getallstaffs()
-                    location.reload()
-                })
-                .catch(err => console.log(err));
-        };
     </script>

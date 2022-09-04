@@ -20,11 +20,13 @@ const getStaff = async(req,res)=>{
     })
 };
 
+//need to add
 const addStaff=async(req,res)=>{
     const {name,nrc,hire_date,salary,status} = req.body;
     
 }
 
+//need to fix for nrc
 const updateStaff = async (req,res)=>{
     const id = req.params.id;
 
