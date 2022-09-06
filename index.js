@@ -8,11 +8,14 @@ const session = require('express-session');
 const {isAuthenticate} = require('./middleware/auth');
 const flash = require('connect-flash');
 
+var public = require('path').join(__dirname,'/public'); 
+app.use(express.static(public)); 
 //passport
 require('./config/passport')(passport);
 //EJS
 app.use(ejsLayout);
 app.set('view engine','ejs');
+app.use(express.static('public/image',))
 
 app.use(bodyParser.json({extended:false}));
 app.use(bodyParser.urlencoded({extended:false}))
@@ -45,5 +48,6 @@ app.use('/customers',isAuthenticate,require('./routes/Customer'));
 app.use('/salesdata',isAuthenticate,require('./routes/Sale'));
 app.use('/vouncher',isAuthenticate,require('./routes/Vouncher'));
 app.use('/add_new',isAuthenticate,require('./routes/addForm'));
+app.use('*',(req,res)=>res.render('404Page'))
 
 app.listen(5000,()=>console.log('servere running'));
