@@ -26,6 +26,16 @@ const deleteSale = async (req,res)=>{
  } catch (error) {
         console.log(error)
  }
+};
+
+const deleteAllSale = async(req,res)=>{
+
+    console.log('all sales deleted')
+
+    // connection.query('TRUNCATE TABLE FROM oilproject.sales',(err,result)=>{
+    //     if(err) throw new Error(err)
+    //     res.redirect('salesdata')
+    // })
 }
 
-module.exports ={getAllSales,deleteSale};
+module.exports ={getAllSales,deleteSale,deleteAllSale};

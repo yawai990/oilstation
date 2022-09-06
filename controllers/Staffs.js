@@ -75,9 +75,14 @@ const deleteStaff = async(req,res)=>{
     }
 };
 const deleteAllStaffs = async(req,res)=>{
-    connection.query('TRUNCATE TABLE oilproject.staffs');
+    console.log('clear all data');
 
-    res.staffs(201).json('all staff deleted')
+    //all staffs delete func make a comment
+    // connection.query('TRUNCATE TABLE oilproject.staffs',(err,result)=>{
+    //     if(err)throw new Error(err)
+    //     res.redirect('/staffs')
+    // });
+
 };
 
 module.exports = {

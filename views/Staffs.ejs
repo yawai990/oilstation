@@ -19,40 +19,44 @@
                         </tr>
                     </thead>
                     <tbody id="body" className='text-center table-group-divider'>
-                            <% for (let i=0; i < results.length; i++) { %>
-                                <tr>
-                                    <td>
-                                        <%= results[i].name %>
-                                    </td>
-                                    <td>
-                                        <%= results[i].nrc %>
-                                    </td>
-                                    <td>
-                                        <% if(results[i].status==='0' ) { %>
-                                        
+                        <% if(results.length < 1){ %>
+                            <tr>
+                                <td>There is no staff to display</td>
+                            </tr>
+                            <% }else{ %>
+                                <% for (let i=0; i < results.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= results[i].name %>
+                                        </td>
+                                        <td>
+                                            <%= results[i].nrc %>
+                                        </td>
+                                        <td>
+                                            <% if(results[i].status==='0' ) { %>
                                                 <div style="width: 15px;height: 15px;" class="bg-danger rounded-circle m-auto"></div>
                                                 <%}else{ %>
                                                     <div style="width: 15px;height: 15px;" class="bg-success rounded-circle m-auto"></div>
                                                     <% } %>
-                                                        </td>
-                                                        <td>
-                                                            <%= results[i].salary %>
-                                                        </td>
-                                                        <td>
-                                                            <%= new Date(results[i].hire_date).getDate() %>-
-                                                                <%= new Date(results[i].hire_date).getMonth() + 1%>-
-                                                                    <%= new Date(results[i].hire_date).getFullYear()%>
-                                                        </td>
-                                                        <td scope="'col" class="btn-group">
-                                                            <a href="/staffs/staff/update_staff/<%= results[i].id %> " type="button"
-                                                                class="btn btn-sm btn-info text-white shadow-md">Edit</a>
-                                                            <form action="/staffs/staff/<%= results[i].id  %>?_method=DELETE " method="post">
-                                                                <button class="btn btn-sm btn-danger shadow-md">Delete</button>
-                                                            </form>
-                                                            <a type=" button" class="btn btn-sm btn-success shadow-md">Print</a>
-                                                        </td>
-                                                        </tr>
-                                                        <% } %>
+                                        </td>
+                                        <td>
+                                            <%= results[i].salary %>
+                                        </td>
+                                        <td>
+                                            <%= new Date(results[i].hire_date).getDate() %>-
+                                                <%= new Date(results[i].hire_date).getMonth() + 1%>-
+                                                    <%= new Date(results[i].hire_date).getFullYear()%>
+                                        </td>
+                                        <td scope="'col" class="btn-group">
+                                            <a href="/staffs/staff/update_staff/<%= results[i].id %> " type="button"
+                                                class="btn btn-sm btn-info text-white shadow-md">Edit</a>
+                                            <form action="/staffs/staff/<%= results[i].id  %>?_method=DELETE " method="post">
+                                                <button class="btn btn-sm btn-danger shadow-md">Delete</button>
+                                            </form>
+                                                            </td>
+                                                            </tr>
+                                                            <% } %>
+                                <% } %>
                     </tbody>
 
                 </table>
@@ -61,7 +65,9 @@
     </section>
     <div class="d-flex justify-content-center items-center mt-5 gap-2">
         <a href="/staffs/staff_add_form" type="button" class="btn btn-info py-1 px-3 rounded-pill text-white">Add New Staff</a>
+        <form action="/staffs/deleteAllStaffs?_method=DELETE" method="post">
         <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+    </form>
         <button id="btn" class="btn btn-success py-1 px-3 rounded-pill text-white">Print</button>
     </div>
 

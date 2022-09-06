@@ -28,11 +28,14 @@
                     <div class="mb-3 col-md-6 col-sm-12 row">
                         <label for="product" class="col-sm-2 col-md-3 col-form-label">Product</label>
                         <div class=" col-sm-12 col-md-9">
-                            <select class="form-select text-center border" name="product" id="product" aria-label="Default select example">
-                                <option value="1">92</option>
-                                <option value="2">95</option>
-                                <option value="3">diesel</option>
-                                <option value="4">P.Diesel</option>
+                            <select class="form-select text-center border 
+                                                        text-capitalize" name="product" id="product" aria-label="Default select example">
+                                <option disabled selected></option>
+                                <% proresults.forEach(pro=>{%>
+                                    <option value="<%= pro.productname  %>" class="text-capitalize">
+                                        <%= pro.productname %>
+                                    </option>
+                                    <% }) %>
                             </select>
                         </div>
                     </div>
@@ -50,9 +53,11 @@
                         <label for="staff_name" class="col-sm-2 col-md-3 col-form-label">SaleBy</label>
                         <!-- this will coming from database -->
                         <div class=" col-sm-12 col-md-9">
-                            <select class="form-select text-center border" name="staff_name" aria-label="Default select example">
+                            <select class="form-select text-center border text-capitalize" name="staff_name" aria-label="Default select example"
+                                required>
+                                <option disabled selected></option>
                                 <% for (let i=0; i < staffresults.length; i++) { %>
-                                    <option value=<%=staffresults[i].id %> >
+                                    <option value=<%=staffresults[i].id %> class="text-capitalize">
                                         <%= staffresults[i].name %>
                                     </option>
                                     <% } %>

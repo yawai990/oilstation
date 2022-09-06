@@ -17,6 +17,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% if(results.length < 1) { %>
+                        <tr>
+                            <td>There is no sales</td>
+                        </tr>
+                        <% }else{ %>
                     <% for (let i=0; i < results.length; i++) { %>
                         <tr>
                             <td scope="col" style="min-width:20px;">
@@ -54,7 +59,7 @@
                                 <a href="/vouncher/<%= saleresults[i].amount %> " type="button" class="btn btn-sm btn-success shadow-md">Print</a>
                             </td>
                         </tr>
-
+                        <% } %>
                         <% } %>
 
                 </tbody>
@@ -62,7 +67,9 @@
         </div>
     </div>
     <div class="d-flex justify-content-center items-center gap-2">
-        <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+        <form action="/salesdata/deleteAllSale?_method=DELETE" method="post">
+            <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+        </form>
         <button id="btn" class="btn btn-success p-2 rounded-pill text-white shadow-sm">Print All</button>
     </div>
     <script>

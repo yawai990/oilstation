@@ -11,38 +11,48 @@
 </style>
 <%- include('./components/Navbar') %>
 
-    <div id="customer-print-area" class="row row-cols-md-5 row-cols-1 row-cols-sm-1 g-4 mb-3">
-        <% cusdata.forEach((cus,ind)=>{%>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <div class="card-header">
-                        <p>
-                            Customer List
-                            <%= ind+1 %>
-                        </p>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">
-                            Customer Licence
-                        </div>
-                        <p>
-                            <%= cus.licence %>
-                        </p>
-
-                        <div class="btn-group gap-2">
-                            <a href="/customers/<%= cus.id  %>" class="btn btn-primary">Edit</a>
-                            <form action="/customers?_method=DELETE&id=<%= cus.id  %>" method="post">
-                                <button class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </div>
+    <div id="customer-print-area" class="p-3 mb-3">
+        <div class="p-2 row row-cols-md-5 row-cols-1 row-cols-sm-1 gap-4 d-flex justify-content-center">
+            <% if(cusdata.length < 1){ %>
+                <div class="col">
+                    <p>There is no customer</p>
                 </div>
-            </div>
-
-            <% }) %>
+                <% }else{ %>
+                    <% cusdata.forEach((cus,ind)=>{%>
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-header">
+                                    <p>
+                                        Customer List
+                                        <%= ind+1 %>
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        Customer Licence
+                                    </div>
+                                    <p>
+                                        <%= cus.licence %>
+                                    </p>
+    
+                                    <div class="btn-group gap-2">
+                                        <a href="/customers/<%= cus.id  %>" class="btn btn-primary">Edit</a>
+                                        <form action="/customers?_method=DELETE&id=<%= cus.id  %>" method="post">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                    <% } %>
+                    
+                        </div>
     </div>
     <div class="d-flex justify-content-center items-center gap-2">
-        <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+<form action="/customers/deleteAllCustomers?_method=DELETE" method="post">
+            <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+        </form>
         <button id="print_btn" class="btn btn-success p-2 rounded-pill text-white shadow-sm">Print</button>
     </div>
     <script>

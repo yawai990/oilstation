@@ -51,4 +51,17 @@ const deleteCustomer = async(req,res)=>{
     }
 };
 
-module.exports = {getCustomers,deleteCustomer,getCustomer,updateCustomer};
+const deleteAllCustomers = async(req,res)=>{
+
+    console.log('all customers deleted')
+    // connection.query('TRUNCATE TABLE FROM oilproject.customers',(err,result)=>{
+    //     if(err)throw new Error(err)
+    //     res.redirect('customers')
+    // })
+}
+
+module.exports = {
+    getCustomers,deleteCustomer,
+    getCustomer,updateCustomer,
+    deleteAllCustomers
+};
