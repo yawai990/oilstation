@@ -46,6 +46,7 @@ app.use('/users',require('./routes/users'));
 app.use('/staffs',isAuthenticate,require('./routes/Staffs'))
 app.use('/customers',isAuthenticate,require('./routes/Customer'));
 app.use('/salesdata',isAuthenticate,require('./routes/Sale'));
+app.use('/sales',require('./routes/Search'));
 app.use('/vouncher',isAuthenticate,require('./routes/Vouncher'));
 app.use('/add_new',isAuthenticate,require('./routes/addForm'));
 app.use('*',(req,res)=>res.render('404Page'))

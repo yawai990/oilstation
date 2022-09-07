@@ -19,7 +19,7 @@
                 <tbody>
                     <% if(results.length < 1) { %>
                         <tr>
-                            <td>There is no sales</td>
+                            <td colspan="8" class="text-start">There is no sales</td>
                         </tr>
                         <% }else{ %>
                     <% for (let i=0; i < results.length; i++) { %>
@@ -47,7 +47,7 @@
                             </td>
                             <td scope="col" style="min-width:120px;">
                                 <%= new Date(results[i].sale_date_time).getDate() %>-<%= new
-                                        Date(results[i].sale_date_time).getMonth() %>-<%= new
+                                        Date(results[i].sale_date_time).getMonth()+1 %>-<%= new
                                             Date(results[i].sale_date_time).getFullYear() %>
                             </td>
                             <td scope="'col" class="btn-group">
@@ -67,10 +67,11 @@
         </div>
     </div>
     <div class="d-flex justify-content-center items-center gap-2">
+        <a type="button" href="/sales/search" class="btn btn-info px-2 py-1 rounded-pill text-white shadow-sm">Search</a>
         <form action="/salesdata/deleteAllSale?_method=DELETE" method="post">
-            <button class="btn btn-danger py-1 px-3 rounded-pill text-white">Delete All</button>
+            <button class="btn btn-danger px-2 py-1 rounded-pill text-white shadow-sm">Delete All</button>
         </form>
-        <button id="btn" class="btn btn-success p-2 rounded-pill text-white shadow-sm">Print All</button>
+        <button id="btn" class="btn btn-success px-2 py-1 rounded-pill text-white shadow-sm">Print All</button>
     </div>
     <script>
 

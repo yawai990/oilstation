@@ -1,0 +1,40 @@
+<%- include('./components/Navbar') %>
+    <div>
+        <div class="bg-white border m-auto col-12 col-sm-10 col-md-8 col-lg-6 p-2 rounded shadow-sm">
+            <h3 class="text-center fw-semibold">Search Customer Receipt</h3>
+
+            <%- include('./partials/message') %>
+
+                <form action="/sales/getfiltersales" method="post"
+                    class="w-100 m-auto p-2 mt-4 d-flex justify-content-center align-items-center flex-column">
+
+
+                    <div class="mb-3 col-md-8 col-sm-12 row">
+                        <label for="cus_name" class="col-sm-2 col-md-5 col-form-label">Customer Licence :</label>
+                        <div class="col-sm-12 col-md-7">
+                            <input type="text" class="form-control" id="cus_name" name="licence_plate">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-8 col-sm-12 row">
+                        <label for="from_date" class="col-sm-2 col-md-5 col-form-label">From :</label>
+                        <div class="col-sm-12 col-md-7">
+                            <input type="date" class="form-control" id="from_date" name="from_date">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-8 col-sm-12 row">
+                        <label for="to_date" class="col-sm-2 col-md-5 col-form-label">To :</label>
+                        <div class="col-sm-12 col-md-7">
+                            <input type="date" class="form-control" id="to_date" name="to_date">
+                        </div>
+
+                        <div class="btn-group gap-2 mt-4">
+                            <a href="/salesdata" type="button" class="p-1 d-block btn btn-primary">Back</a>
+                            <button style="min-width: 100px;" class="p-1 d-block btn btn-primary">Search</button>
+                        </div>
+                </form>
+        </div>
+    </div>

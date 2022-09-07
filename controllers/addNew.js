@@ -33,7 +33,7 @@ const addnewdata = async(req,res)=>{
     })
     }else{
             try {
-                    connection.query(`INSERT INTO customers(licence) VALUES('${licence_plate}')`,(err,result)=>{
+                    connection.query(`INSERT INTO customers(licence) VALUES('${licence_plate.toUpperCase()}')`,(err,result)=>{
                         if(err)throw new Error(err);
 
                         connection.query(`SELECT * FROM oilproject.customers WHERE licence='${licence_plate}'`,(err,result)=>{
